@@ -8,5 +8,7 @@ router.post('/pushAd', adminController.pushAd);
 router.post('/addFilter', adminController.addFilter);
 /* Get filters. */
 router.get('/filtered', adminController.getFiltered);
+/* Get Unhealthy Posts. */
+router.get('/unhealthy', adminController.getUnhealthy);
 
 module.exports = router;
