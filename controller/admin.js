@@ -35,7 +35,7 @@ exports.getUnhealthy = async(req, res, next) => {
     try {
         res.status(200).send({
             message: "Filter added successfully.",
-            data: await Post.find({unhealthy: true})
+            data: await Post.find({unhealthy: true}).populate({path: 'userid', module: 'User'}).execPopulate()
         });
     } catch (err) {
         next(err);

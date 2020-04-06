@@ -9,6 +9,6 @@ router.post('/addFilter', adminController.addFilter);
 /* Get filters. */
 router.get('/filtered', adminController.getFiltered);
 /* Get Unhealthy Posts. */
-router.get('/unhealthy', adminController.getUnhealthy);
+router.get('/unhealthy-post', adminController.getUnhealthy);
 
 module.exports = router;
