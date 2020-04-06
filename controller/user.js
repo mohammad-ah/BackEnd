@@ -66,7 +66,6 @@ exports.disableNotifications = async (req, res, next) => {
         const user = await User.findById(req.body.id);
         user.recievenotifications = false;
         user.save();
-        console.log(user);
         res.status(200).send({ message: "Notifications disabled successfully."});
     } catch (err) {
         next(err);
@@ -78,7 +77,6 @@ exports.enableNotifications = async (req, res, next) => {
         const user = await User.findById(req.body.id);
         user.recievenotifications = true;
         user.save();
-        console.log(user);
         res.status(200).send({ message: "Notifications enabled successfully."});
     } catch (err) {
         next(err);
