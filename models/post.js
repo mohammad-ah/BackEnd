@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schama = mongoose.Schema;
+const Words = require("../models/filteration")
 
 const schema = new Schama({
     userid: {
@@ -13,6 +14,9 @@ const schema = new Schama({
     img: {
         type: String
     },
+    unhealthy: {
+        type: Boolean
+    },
     createdat: {
         type: Date,
         default: Date.now
@@ -24,14 +28,27 @@ const schema = new Schama({
 });
 
 //validation function
-function chechPostValidity(value) {
+function checkPostContent(value) {
     return !(value.text === null && value.img === null)
 }
 
 //now pass in the dateStampSchema object as the type for a schema field
 var postSchema = new Schema({
-    postInfo: {type:schema, validate:chechPostValidity}
+    postInfo: {type:schema, validate:checkPostContent}
 });
+
+//validation function
+async function checkUnhealthyWords(value) {
+    const postWordsList = this.text.split(" ");
+    const wordsList = Words.find().words;
+    wordsList.forEach(word => {
+        postWordsList.forEach(element => {
+            if (element == word) {
+                this.unhealthy = false;
+            }
+        });
+    });
+}
 
 postSchema.index({ userid: 1 }, { sparse: true });
 

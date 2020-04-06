@@ -25,6 +25,10 @@ const userSchema = new Schema({
         ref: 'User',
         required: true
     }],
+    active: {
+        type: Boolean,
+        default: true
+    },
     createdat: {
         type: Date,
         default: Date.now
