@@ -29,6 +29,10 @@ const userSchema = new Schema({
         type: Boolean,
         default: true
     },
+    recievenotifications: {
+        type: Boolean,
+        default: true
+    },
     createdat: {
         type: Date,
         default: Date.now

@@ -7,7 +7,8 @@ router.post('/user-register', userController.signUp);
 router.post('/follow', userController.followUser);
 router.post('/unfollow', userController.unfollowUser);
 router.get('/following/:id', userController.followingList);
-// router.post('/disable-notifications', userController.disableNotifications);
+router.post('/disable-notifications', userController.disableNotifications);
+router.post('/enable-notifications', userController.enableNotifications);
 // router.post('/follow', userController.followUser);
 
 module.exports = router;
