@@ -55,10 +55,32 @@ exports.unfollowUser = async (req, res, next) => {
 exports.followingList = async (req, res, next) => {
     try {
         const user = await User.findById(req.params.id);
-        console.log(user);
         res.status(200).send({ message: "Following List get successfully.", following: user.following});
     } catch (err) {
         next(err);
     }
+};
 
+exports.disableNotifications = async (req, res, next) => {
+    try {
+        const user = await User.findById(req.body.id);
+        user.recievenotifications = false;
+        user.save();
+        console.log(user);
+        res.status(200).send({ message: "Notifications disabled successfully."});
+    } catch (err) {
+        next(err);
+    }
+};
+
+exports.enableNotifications = async (req, res, next) => {
+    try {
+        const user = await User.findById(req.body.id);
+        user.recievenotifications = true;
+        user.save();
+        console.log(user);
+        res.status(200).send({ message: "Notifications enabled successfully."});
+    } catch (err) {
+        next(err);
+    }
 };
