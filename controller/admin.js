@@ -18,3 +18,14 @@ exports.addFilter = async(req, res, next) => {
         next(err);
     }
 }
+
+exports.getFiltered = async(req, res, next) => {    
+    try {
+        res.status(200).send({
+            message: "Filter added successfully.",
+            data: await Filter.find()
+        });
+    } catch (err) {
+        next(err);
+    }
+}

@@ -6,5 +6,7 @@ const adminController = require('../controller/admin');
 router.post('/pushAd', adminController.pushAd);
 /* Add a filter. */
 router.post('/addFilter', adminController.addFilter);
+/* Get filters. */
+router.get('/filtered', adminController.getFiltered);
 
 module.exports = router;
