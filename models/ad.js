@@ -20,4 +20,4 @@ const adSchema = new Schama({
     }
 });
 
-module.exports = mongoose.model('Ad', commentSchema);
+module.exports = mongoose.model('Ad', adSchema);
