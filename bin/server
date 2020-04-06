@@ -1,0 +1,50 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+const app = require('../app');
+// var debug = require('debug')('backend:server');
+const db = require("../utils/db");
+
+/**
+ * Dev dependencies
+ */
+const { portNum } = require("./.env");
+
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+const port = process.env.PORT || portNum;
+app.set('port', port);
+
+/**
+ * Listen on provided port, on all network interfaces.
+ * connect to DB
+ */
+
+db.connect
+    .then(() => {
+        app.listen(port, () => {
+            console.log('Server is running on', port);
+        });
+    })
+    .catch(err => console.log(err));
+
+// app.listen(port);
+// app.on('listening', onListening);
+
+/**
+ * Event listener for server "listening" event.
+ */
+
+// function onListening() {
+//   var addr = server.address();
+//   var bind = typeof addr === 'string'
+//     ? 'pipe ' + addr
+//     : 'port ' + addr.port;
+//   debug('Listening on ' + bind);
+// }
