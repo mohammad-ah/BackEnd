@@ -15,7 +15,8 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const adminRouter = require('./routes/admin');
 const postsRouter = require('./routes/posts');
-
+const commentsRouter = require('./routes/comments');
+const likesRouter = require('./routes/likes');
 
 /**
  * Express Module.
@@ -49,7 +50,8 @@ app.use('/', indexRouter);
 app.use('/user', usersRouter);
 app.use('/admin', adminRouter);
 app.use('/post', postsRouter);
-
+app.use('/comments', commentsRouter);
+app.use('/likes', likesRouter);
 
 /**
  * error handling
