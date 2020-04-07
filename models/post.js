@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
-const Schama = mongoose.Schema;
+const Schema = mongoose.Schema;
 const Words = require("../models/filteration")
 
-const schema = new Schama({
+const postSchema = new Schema({
     userid: {
         type: mongoose.Types.ObjectId,
         ref: 'User',
@@ -27,29 +27,25 @@ const schema = new Schama({
     }
 });
 
-//validation function
-function checkPostContent(value) {
-    return !(value.text === null && value.img === null)
-}
+postSchema.pre('save', async function(next) {
+    console.log(this);
+    if(this.text === null && this.img === null) {
+        var err = new Error('Post should contain text or img');
+        next(err);
+    }
 
-//now pass in the dateStampSchema object as the type for a schema field
-var postSchema = new Schema({
-    postInfo: {type:schema, validate:checkPostContent}
-});
-
-//validation function
-async function checkUnhealthyWords(value) {
+    this.unhealthy = false;
     const postWordsList = this.text.split(" ");
-    const wordsList = Words.find();
+    const wordsList = await Words.find();
     wordsList.forEach(wordObj => {
         postWordsList.forEach(element => {
             if (element == wordObj.word) {
-                this.unhealthy = false;
-                // check this for updating unhealthy bool
+                this.unhealthy = true;
+                return;
             }
         });
     });
-}
+});
 
 postSchema.index({ userid: 1 }, { sparse: true });
 
