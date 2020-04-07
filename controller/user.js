@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const Activation = require('../models/activation');
 
 exports.signUp = async (req, res, next) => {
     try {
@@ -82,3 +83,17 @@ exports.enableNotifications = async (req, res, next) => {
         next(err);
     }
 };
+
+exports.requestActivation = async(req, res, next) => {
+    try {
+        const user = await User.findById(req.body.id);
+        if(user.active) {
+            res.status(400).send({message: "user is active already."});
+        }  else {
+            await new Activation({userid: req.body.id}).save();
+            res.status(200).send({message: "success."});
+        }
+    } catch (err) {
+        next(err);
+    }
+}

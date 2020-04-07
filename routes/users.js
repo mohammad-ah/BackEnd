@@ -9,5 +9,6 @@ router.post('/unfollow', userController.unfollowUser);
 router.get('/following/:id', userController.followingList);
 router.post('/disable-notifications', userController.disableNotifications);
 router.post('/enable-notifications', userController.enableNotifications);
+router.post('/request-activation', userController.requestActivation);
 
 module.exports = router;
