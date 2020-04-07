@@ -34,9 +34,18 @@ exports.getFiltered = async(req, res, next) => {
 exports.getUnhealthy = async(req, res, next) => {    
     try {
         res.status(200).send({
-            message: "Filter added successfully.",
-            data: await Post.find({unhealthy: true}).populate({path: 'userid', module: 'User'}).execPopulate()
+            message: "success.",
+            data: await Post.find({unhealthy: true}).populate({path: 'userid', module: 'User'})
         });
+    } catch (err) {
+        next(err);
+    }
+}
+
+exports.disableHealthy = async(req, res, next) => {
+    try {
+        await Post.updateOne({_id: req.body.id}, {unhealthy: false});
+        res.status(200).send({ message: "success."});
     } catch (err) {
         next(err);
     }
