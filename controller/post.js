@@ -55,3 +55,30 @@ exports.getFollowingPosts = async (req, res, next) => {
         next(err);
     }
 };
+
+exports.searchPosts = async (req, res, next) => {
+    const userId = req.params.id;
+    const search = req.params.search;
+    const limit = parseInt(req.params.limit);
+    const skip = parseInt(req.params.skip);
+
+
+    const user = await User.findById(userId);
+    console.log('params', req.params, user);
+
+    try {
+        const posts = await Post.find(
+            {
+                text: {
+                    '$regex': search, '$options': "i"
+                },
+                userid: {
+                    '$in': [user.following, userId]
+                }
+            }).sort({createdat: -1}).skip(skip).limit(limit);
+
+        res.status(200).send({message: "Posts got successfully.", posts: posts});
+    } catch (err) {
+        next(err);
+    }
+};

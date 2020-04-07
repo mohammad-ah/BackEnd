@@ -26,6 +26,4 @@ const notificationSchema = new Schama({
     }
 });
 
-// commentSchema.index({ postid: 1, userid:1 }, { sparse: true });
-
 module.exports = mongoose.model('Notification', notificationSchema);
