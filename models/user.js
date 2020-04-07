@@ -33,6 +33,10 @@ const userSchema = new Schema({
         type: Boolean,
         default: true
     },
+    unhealthypostsnum: {
+        type: Number,
+        default: 0
+    },
     createdat: {
         type: Date,
         default: Date.now

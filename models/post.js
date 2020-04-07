@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const Words = require("../models/filteration")
+const Words = require("../models/filteration");
+const User = require("../models/user");
 
 const postSchema = new Schema({
     userid: {
@@ -41,11 +42,18 @@ postSchema.pre('save', async function(next) {
         postWordsList.forEach(element => {
             if (element == wordObj.word) {
                 this.unhealthy = true;
+                updateUnhealthyPostsNum(this.userid);
                 return;
             }
         });
     });
 });
+
+async function updateUnhealthyPostsNum(userid) {
+    const user = await User.find({_id: userid});
+    user.unhealthypostsnum += 1;
+    user.save();
+}
 
 postSchema.index({ userid: 1 }, { sparse: true });
 
