@@ -26,7 +26,8 @@ exports.getFollowingPosts = async (req, res, next) => {
                 '$match': {
                     'userid': {
                         '$in': user.following
-                    }
+                    },
+                    'unhealthy': false
                 }
             },
             {
