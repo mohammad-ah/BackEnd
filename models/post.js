@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const Words = require("../models/filteration");
 const User = require("../models/user");
+const notificationController = require('../controller/notification');
 
 const postSchema = new Schema({
     userid: {
@@ -18,6 +19,10 @@ const postSchema = new Schema({
     unhealthy: {
         type: Boolean
     },
+    notifyusers: {
+        type: Boolean,
+        default: false
+    },
     createdat: {
         type: Date,
         default: Date.now
@@ -29,7 +34,6 @@ const postSchema = new Schema({
 });
 
 postSchema.pre('save', async function(next) {
-    console.log(this);
     if(this.text === null && this.img === null) {
         var err = new Error('Post should contain text or img');
         next(err);
@@ -53,7 +57,11 @@ async function updateUnhealthyPostsNum(userid) {
     const user = await User.find({_id: userid});
     user.unhealthypostsnum += 1;
     user.save();
-}
+};
+
+postSchema.post('save', async function(next) {
+    notificationController.notifyUsers(this);
+});
 
 postSchema.index({ userid: 1 }, { sparse: true });
 
