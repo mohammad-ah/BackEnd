@@ -7,6 +7,10 @@ const activationSchema = new Schama({
         ref: 'User',
         required: true
     },
+    reviewed: {
+        type: Boolean,
+        default: false
+    },
     createdat: {
         type: Date,
         default: Date.now

@@ -1,7 +1,8 @@
 const Ad = require('../models/ad');
 const Filter = require('../models/filteration');
 const Post = require('../models/post');
-const Activation = require('../models/activation')
+const Activation = require('../models/activation');
+const User = require('../models/user');
 
 exports.pushAd = async (req, res, next) => {
     try {
@@ -57,6 +58,35 @@ exports.getActivationRequests = async(req, res, next) => {
         res.status(200).send({
             message: "success.",
             data: await Activation.find().populate({path: 'userid', module: 'User'})
+        });
+    } catch (err) {
+        next(err);
+        
+    }
+}
+
+exports.acceptActivation = async(req, res, next) => {
+    try {
+        const activation = await Activation.find({_id: req.body.id});
+        await User.updateOne({_id: activation.userid}, {active: true});
+        activation.reviewed = true;
+        await activation.save();
+        res.status(200).send({
+            message: "success."
+        });
+    } catch (err) {
+        next(err);
+        
+    }
+}
+
+exports.refuseActivation = async(req, res, next) => {
+    try {
+        const activation = await Activation.find({_id: req.body.id});
+        activation.reviewed = true;
+        await activation.save();
+        res.status(200).send({
+            message: "success."
         });
     } catch (err) {
         next(err);
