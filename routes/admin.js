@@ -10,5 +10,7 @@ router.post('/addFilter', adminController.addFilter);
 router.get('/filtered', adminController.getFiltered);
 /* Get Unhealthy Posts. */
 router.get('/unhealthy-post', adminController.getUnhealthy);
+/* Get Unhealthy Posts. */
+router.post('/disable-unhealthy', adminController.disableHealthy);
 
 module.exports = router;
