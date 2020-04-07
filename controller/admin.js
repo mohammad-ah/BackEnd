@@ -1,6 +1,7 @@
 const Ad = require('../models/ad');
 const Filter = require('../models/filteration');
 const Post = require('../models/post');
+const Activation = require('../models/activation')
 
 exports.pushAd = async (req, res, next) => {
     try {
@@ -48,5 +49,17 @@ exports.disableHealthy = async(req, res, next) => {
         res.status(200).send({ message: "success."});
     } catch (err) {
         next(err);
+    }
+}
+
+exports.getActivationRequests = async(req, res, next) => {
+    try {
+        res.status(200).send({
+            message: "success.",
+            data: await Activation.find().populate({path: 'userid', module: 'User'})
+        });
+    } catch (err) {
+        next(err);
+        
     }
 }
