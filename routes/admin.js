@@ -15,8 +15,8 @@ router.post('/disable-unhealthy', adminController.disableHealthy);
 /* Get Activation Requests. */
 router.get('/activations', adminController.getActivationRequests);
 /* Accept Activation Request. */
-router.get('/accept-activation', adminController.acceptActivation);
+router.post('/accept-activation', adminController.acceptActivation);
 /* Refuse Activation Request. */
-router.get('/refuse-activation', adminController.refuseActivation);
+router.post('/refuse-activation', adminController.refuseActivation);
 
 module.exports = router;

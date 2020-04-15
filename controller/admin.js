@@ -69,8 +69,7 @@ exports.acceptActivation = async(req, res, next) => {
     try {
         const activation = await Activation.find({_id: req.body.id});
         await User.updateOne({_id: activation.userid}, {active: true});
-        activation.reviewed = true;
-        await activation.save();
+        await Activation.updateOne({_id: req.body.id}, {reviewed: true});
         res.status(200).send({
             message: "success."
         });
@@ -82,13 +81,12 @@ exports.acceptActivation = async(req, res, next) => {
 
 exports.refuseActivation = async(req, res, next) => {
     try {
-        const activation = await Activation.find({_id: req.body.id});
-        activation.reviewed = true;
-        await activation.save();
+        await Activation.updateOne({_id: req.body.id}, {reviewed: true});
         res.status(200).send({
             message: "success."
         });
     } catch (err) {
+        console.log(err);
         next(err);
         
     }
