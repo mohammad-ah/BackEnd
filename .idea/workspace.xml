@@ -3,7 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="7ba0a953-9757-45cc-81a6-45753ce3dab7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/post.js" beforeDir="false" afterPath="$PROJECT_DIR$/controller/post.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/.env.json" beforeDir="false" afterPath="$PROJECT_DIR$/bin/.env.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/post.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/post.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/db.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,7 +34,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="JSON" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../VS Ass" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../FrontEnd" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
@@ -77,9 +79,13 @@
       <screen x="0" y="0" width="1707" height="919" />
     </state>
     <state x="631" y="262" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1707.919@0.0.1707.919" timestamp="1586056502482" />
-    <state x="633" y="214" key="FileChooserDialogImpl" timestamp="1586135187466">
+    <state x="633" y="214" key="FileChooserDialogImpl" timestamp="1586658002268">
       <screen x="0" y="0" width="1707" height="919" />
     </state>
-    <state x="633" y="214" key="FileChooserDialogImpl/0.0.1707.919@0.0.1707.919" timestamp="1586135187466" />
+    <state x="633" y="214" key="FileChooserDialogImpl/0.0.1707.919@0.0.1707.919" timestamp="1586658002268" />
+    <state x="510" y="210" key="run.anything.popup" timestamp="1586235415091">
+      <screen x="0" y="0" width="1707" height="919" />
+    </state>
+    <state x="510" y="210" key="run.anything.popup/0.0.1707.919@0.0.1707.919" timestamp="1586235415091" />
   </component>
 </project>

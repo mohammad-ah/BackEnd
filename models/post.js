@@ -59,9 +59,9 @@ async function updateUnhealthyPostsNum(userid) {
     await User.findOneAndUpdate({ _id: userid }, { $inc: { unhealthypostsnum: 1 } }, {new: true });
 };
 
-postSchema.post('save', async function(next) {
-    notificationController.notifyUsers(this);
-});
+// postSchema.post('save', async function(next) {
+//     notificationController.notifyUsers(this);
+// });
 
 postSchema.index({ userid: 1 }, { sparse: true });
 
