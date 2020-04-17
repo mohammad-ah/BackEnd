@@ -1,11 +1,58 @@
 const Post = require('../models/post');
 const User = require('../models/user');
+const multer = require('multer');
+const multiparty = require('multiparty');
+const fs = require('fs')
+
+var DIR = '../public/';
+var upload = multer({dest: DIR}).single('image');
 
 
 exports.createPost = async (req, res, next) => {
   try {
-      await new Post(req.body).save();
-      res.status(200).send({message: 'Post created successfully'})
+      // console.log(req.body);
+      // console.log('start');
+      let body = {};
+      let post = null;
+
+      let file = null;
+      let form = new multiparty.Form();
+      form.parse(req, async function(err, fields, files) {
+          console.log('backend');
+
+          body['userid'] = fields.userid[0];
+          if (fields.hasOwnProperty('text')) {
+              body['text'] = fields.text[0];
+          }
+          body['notifyusers'] = fields.notifyusers[0];
+
+          if (files.hasOwnProperty('image')) {
+              file = files.image[0];
+
+              var tmp_path = file.path;
+              // console.log(tmp_path)
+              /** The original name of the uploaded file
+               stored in the variable "originalname". **/
+              var target_path = 'public/' + file.originalFilename;
+
+              body['img'] = file.originalFilename;
+
+              /** A better way to copy the uploaded file. **/
+              var src = fs.createReadStream(tmp_path);
+              var dest = fs.createWriteStream(target_path);
+              src.pipe(dest);
+              src.on('end', async function () {
+                  post = await new Post(body).save();
+                  res.status(200).send({message: 'Post created successfully', post: post});
+              });
+              src.on('error', function (err) {
+                  next(err);
+              });
+          } else {
+              post = await new Post(body).save();
+              res.status(200).send({message: 'Post created successfully', post: post});
+          }
+      });
   } catch(err) {
       next(err);
   }
@@ -19,13 +66,14 @@ exports.getFollowingPosts = async (req, res, next) => {
 
         const user = await User.findById(userId);
 
-        console.log(user);
+        let usersIds = user.following;
+            usersIds.push(userId);
 
         const list = await Post.aggregate([
             {
                 '$match': {
                     'userid': {
-                        '$in': user.following
+                        '$in': usersIds
                     },
                     'unhealthy': false
                 }
@@ -46,7 +94,7 @@ exports.getFollowingPosts = async (req, res, next) => {
                     'as': 'likes'
                 }
             }
-        ]).sort({ createdat: 1 }).skip(skip).limit(limit);
+        ]).sort({ createdat: -1 }).skip(skip).limit(limit);
 
         const result = await User.populate(list, {path: 'comments.userid likes.userid userid', select: '_id email username'});
 
@@ -78,6 +126,21 @@ exports.searchPosts = async (req, res, next) => {
             }).sort({createdat: -1}).skip(skip).limit(limit);
 
         res.status(200).send({message: "Posts got successfully.", posts: posts});
+    } catch (err) {
+        next(err);
+    }
+};
+
+exports.removePost = async (req, res, next) => {
+    const postId = req.body.id;
+
+    try {
+        await Post.deleteOne(
+            {
+                '_id': postId
+            });
+
+        res.status(200).send({message: "Post deleted successfully."});
     } catch (err) {
         next(err);
     }

@@ -40,23 +40,23 @@ postSchema.pre('save', async function(next) {
     }
 
     this.unhealthy = false;
-    const postWordsList = this.text.split(" ");
-    const wordsList = await Words.find();
-    wordsList.forEach(wordObj => {
-        postWordsList.forEach(element => {
-            if (element == wordObj.word) {
-                this.unhealthy = true;
-                updateUnhealthyPostsNum(this.userid);
-                return;
-            }
+    if (this.hasOwnProperty('text')) {
+        const postWordsList = this.text.split(" ");
+        const wordsList = await Words.find();
+        wordsList.forEach(wordObj => {
+            postWordsList.forEach(element => {
+                if (element == wordObj.word) {
+                    this.unhealthy = true;
+                    updateUnhealthyPostsNum(this.userid);
+                    return;
+                }
+            });
         });
-    });
+    }
 });
 
 async function updateUnhealthyPostsNum(userid) {
-    const user = await User.find({_id: userid});
-    user.unhealthypostsnum += 1;
-    user.save();
+    await User.findOneAndUpdate({ _id: userid }, { $inc: { unhealthypostsnum: 1 } }, {new: true });
 };
 
 postSchema.post('save', async function(next) {

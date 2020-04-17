@@ -17,6 +17,7 @@ const adminRouter = require('./routes/admin');
 const postsRouter = require('./routes/posts');
 const commentsRouter = require('./routes/comments');
 const likesRouter = require('./routes/likes');
+const notificationsRouter = require('./routes/notifications');
 
 /**
  * Express Module.
@@ -42,7 +43,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
 /**
  * Routing
  */
@@ -52,6 +52,7 @@ app.use('/admin', adminRouter);
 app.use('/post', postsRouter);
 app.use('/comments', commentsRouter);
 app.use('/likes', likesRouter);
+app.use('/notifications', notificationsRouter);
 
 /**
  * error handling
@@ -70,6 +71,18 @@ app.use(function(err, req, res, next) {
   // res.render('error');
 });
 
+
+// var cors = require('cors');
+// app.use(cors());
+//
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header(
+//       "Access-Control-Allow-Headers",
+//       "Origin, X-Requested-With, Content-Type, Accept"
+//   );
+//   next();
+// });
 
 /**
  * Export Express App

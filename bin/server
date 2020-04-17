@@ -7,6 +7,9 @@
 const app = require('../app');
 // var debug = require('debug')('backend:server');
 const db = require("../utils/db");
+const notifications = require('./notifications');
+const socketio = require('socket.io');
+
 
 /**
  * Dev dependencies
@@ -28,10 +31,11 @@ app.set('port', port);
 
 db.connect
     .then(() => {
-        app.listen(port, () => {
+        let connection = app.listen(port, () => {
             console.log('Server is running on', port);
         });
-    })
+        let socket = socketio(connection);
+        new notifications(this.app, socket).routesConfig();    })
     .catch(err => console.log(err));
 
 // app.listen(port);

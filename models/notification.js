@@ -16,6 +16,10 @@ const notificationSchema = new Schama({
         type: String,
         required: true
     },
+    read_by: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'User'
+    }],
     createdat: {
         type: Date,
         default: Date.now
