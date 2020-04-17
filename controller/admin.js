@@ -13,6 +13,14 @@ exports.pushAd = async (req, res, next) => {
     }
 };
 
+exports.getAd = async (req, res, next) => {
+    try {
+        res.status(200).send({message: "success", data: await Ad.findOne()});
+    } catch (err) {
+        next(err);
+    }
+}
+
 exports.addFilter = async(req, res, next) => {
     try {
         await new Filter(req.body).save();

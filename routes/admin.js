@@ -4,6 +4,8 @@ const adminController = require('../controller/admin');
 
 /* Push ad. */
 router.post('/pushAd', adminController.pushAd);
+/* Push ad. */
+router.get('/ad', adminController.getAd);
 /* Add a filter. */
 router.post('/addFilter', adminController.addFilter);
 /* Get filters. */
