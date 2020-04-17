@@ -96,4 +96,25 @@ exports.requestActivation = async(req, res, next) => {
     } catch (err) {
         next(err);
     }
-}
+};
+
+exports.listUsers = async(req, res, next) => {
+    try {
+        const users = await User.find();
+        res.status(200).send({message: "success.", users: users});
+    } catch (err) {
+        next(err);
+    }
+};
+
+exports.userFollowings = async(req, res, next) => {
+    try {
+        const user = await User.findOne({_id: req.params.id}).populate(
+            {path: 'following', select: '_id email username'}
+        );
+        const followings = user.following;
+        res.status(200).send({message: "success.", followings: followings});
+    } catch (err) {
+        next(err);
+    }
+};
