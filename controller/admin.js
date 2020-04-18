@@ -3,11 +3,38 @@ const Filter = require('../models/filteration');
 const Post = require('../models/post');
 const Activation = require('../models/activation');
 const User = require('../models/user');
+const multiparty = require('multiparty');
+const fs = require('fs');
 
 exports.pushAd = async (req, res, next) => {
     try {
-        await new Ad(req.body).save();
-        res.status(200).send({ message: "Ad pushed successfully."});
+        let form = new multiparty.Form();
+        let body = {};        
+        form.parse(req, async function(err, fields, files) {
+            console.log(files);
+            console.log(fields);
+            body['text'] = fields.text[0];
+            body['isAll'] = fields.isAll[0];
+            file = files.image[0];
+            console.log(file);
+            
+            var tmp_path = file.path;
+            var target_path = 'public/' + file.originalFilename;
+
+            body['image'] = file.originalFilename;
+
+            /** A better way to copy the uploaded file. **/
+            var src = fs.createReadStream(tmp_path);
+            var dest = fs.createWriteStream(target_path);
+            src.pipe(dest);
+            src.on('end', async function () {
+                await new Ad(body).save();
+                res.status(200).send({ message: "Ad pushed successfully."});
+            });
+            src.on('error', function (err) {
+                next(err);
+            });
+        });
     } catch (err) {
         next(err);
     }
