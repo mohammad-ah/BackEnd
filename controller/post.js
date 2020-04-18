@@ -38,14 +38,22 @@ exports.createPost = async (req, res, next) => {
               src.pipe(dest);
               src.on('end', async function () {
                   post = await new Post(body).save();
-                  res.status(200).send({message: 'Post created successfully', post: post});
+                  const res = post.populate(
+                      {path: 'userid', select: '_id email username'}
+                  );
+                  console.log(res)
+                  res.status(200).send({message: 'Post created successfully', post: res});
               });
               src.on('error', function (err) {
                   next(err);
               });
           } else {
               post = await new Post(body).save();
-              res.status(200).send({message: 'Post created successfully', post: post});
+              const res = post.populate(
+                  {path: 'userid', select: '_id email username'}
+              );
+              console.log(res)
+              res.status(200).send({message: 'Post created successfully', post: res});
           }
       });
   } catch(err) {
