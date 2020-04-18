@@ -33,7 +33,7 @@ exports.createPost = async (req, res, next) => {
               // console.log(tmp_path)
               /** The original name of the uploaded file
                stored in the variable "originalname". **/
-              var target_path = 'public/' + file.originalFilename;
+              var target_path = 'node_modules/public/' + file.originalFilename;
 
               body['img'] = file.originalFilename;
 

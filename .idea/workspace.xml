@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7ba0a953-9757-45cc-81a6-45753ce3dab7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/96552.f56.7ba82S7ay1Cm2MjUAAA-1200x650-b-p.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/HTB15d48PXXXXXaCaXXXq6xXFXXXK.jpg_q50.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Tribal-Dragon-29-Vinyl-Decal-Sticker__68108.1506206013.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/pQM41g7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/panda-dragon.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/stickers-tribal-dragon-tattoo.jpg.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/tumblr_nylpy9xW6T1u118xgo1_1280.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/post.js" beforeDir="false" afterPath="$PROJECT_DIR$/controller/post.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +66,7 @@
       <workItem from="1586054892256" duration="3175000" />
       <workItem from="1586058694292" duration="5834000" />
       <workItem from="1586135143478" duration="5026000" />
-      <workItem from="1587177152664" duration="5375000" />
+      <workItem from="1587177152664" duration="5580000" />
     </task>
     <servers />
   </component>
