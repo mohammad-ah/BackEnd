@@ -4,8 +4,8 @@ const multer = require('multer');
 const multiparty = require('multiparty');
 const fs = require('fs')
 
-var DIR = '../public/';
-var upload = multer({dest: DIR}).single('image');
+// var DIR = '../public/';
+// var upload = multer({dest: DIR}).single('image');
 
 
 exports.createPost = async (req, res, next) => {
