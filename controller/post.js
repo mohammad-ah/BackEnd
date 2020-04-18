@@ -124,7 +124,9 @@ exports.searchPosts = async (req, res, next) => {
                 }
             }).sort({createdat: -1}).skip(skip).limit(limit);
 
-        res.status(200).send({message: "Posts got successfully.", posts: posts});
+        const result = await User.populate(posts, {path: 'userid', select: '_id email username'});
+
+        res.status(200).send({message: "Posts got successfully.", posts: result});
     } catch (err) {
         next(err);
     }
