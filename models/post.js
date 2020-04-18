@@ -34,15 +34,23 @@ const postSchema = new Schema({
 });
 
 postSchema.pre('save', async function(next) {
+    console.log('in pre save')
     if(this.text === null && this.img === null) {
         var err = new Error('Post should contain text or img');
         next(err);
     }
+    console.log('in pre save')
+    console.log('this', this)
 
     this.unhealthy = false;
-    if (this.hasOwnProperty('text')) {
+
+    let data = this.toObject();
+
+    if (data.hasOwnProperty('text')) {
+        console.log('in pre save text')
         const postWordsList = this.text.split(" ");
         const wordsList = await Words.find();
+        console.log(wordsList);
         wordsList.forEach(wordObj => {
             postWordsList.forEach(element => {
                 if (element == wordObj.word) {
