@@ -1,12 +1,7 @@
 const Post = require('../models/post');
 const User = require('../models/user');
-const multer = require('multer');
 const multiparty = require('multiparty');
 const fs = require('fs')
-
-// var DIR = '../public/';
-// var upload = multer({dest: DIR}).single('image');
-
 
 exports.createPost = async (req, res, next) => {
   try {
