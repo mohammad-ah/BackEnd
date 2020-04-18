@@ -8,7 +8,7 @@ const auth = jwt({
 });
 
 /* GET users listing. */
-router.post('/user-register', userController.signUp);
+router.post('/register', userController.signUp);
 router.post('/login', userController.login);
 router.post('/follow', userController.followUser);
 router.post('/unfollow', userController.unfollowUser);
