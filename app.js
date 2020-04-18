@@ -44,7 +44,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
 
 /**
  * Routing
@@ -59,8 +59,11 @@ app.use('/notifications', notificationsRouter);
 
 
 app.use(function(req, res, next) {
-  console.log('sssssssssssssssssssssssssssssssss')
-next();
+  console.log('sssssssssssssssssssssssssssssssss');
+  res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
+  next();
 });
 
 /**
